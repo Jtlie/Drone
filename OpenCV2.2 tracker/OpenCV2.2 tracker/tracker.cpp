@@ -36,6 +36,7 @@ int main(int argc, char* argv[]){
 	p_imgProcessed = cvCreateImage(   size640x480
 									, IPL_DEPTH_8U, 1);
 
+
 	while (1){
 		p_imgOriginal = cvQueryFrame(p_capWebcam);
 		if (p_imgOriginal == NULL) {
