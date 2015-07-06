@@ -1,0 +1,13 @@
+﻿Build started 7/6/2015 4:54:20 PM.
+     1>Project "E:\Workspace\Visual Studio\Projects\OPENCV-test\OPENCV-test\OPENCV-test.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         E:\Program Files\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /IE:\Workspace\opencv\opencv\build\x64\vc12\..\..\include /Zi /nologo /W3 /WX- /sdl /Od /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt Source.cpp
+         Source.cpp
+       Link:
+         E:\Program Files\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Workspace\Visual Studio\Projects\OPENCV-test\x64\Debug\OPENCV-test.exe" /INCREMENTAL /NOLOGO /LIBPATH:\lib /LIBPATH:\staticlib opencv_ts300d.lib opencv_world300d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\Workspace\Visual Studio\Projects\OPENCV-test\x64\Debug\OPENCV-test.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Workspace\Visual Studio\Projects\OPENCV-test\x64\Debug\OPENCV-test.lib" /MACHINE:X64 x64\Debug\Source.obj
+         OPENCV-test.vcxproj -> E:\Workspace\Visual Studio\Projects\OPENCV-test\x64\Debug\OPENCV-test.exe
+     1>Done Building Project "E:\Workspace\Visual Studio\Projects\OPENCV-test\OPENCV-test\OPENCV-test.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.28

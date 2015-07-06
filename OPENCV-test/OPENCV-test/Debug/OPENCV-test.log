@@ -1,0 +1,10 @@
+﻿Build started 7/6/2015 4:53:15 PM.
+     1>Project "E:\Workspace\Visual Studio\Projects\OPENCV-test\OPENCV-test\OPENCV-test.vcxproj" on node 2 (Build target(s)).
+     1>Link:
+         E:\Program Files\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\Workspace\Visual Studio\Projects\OPENCV-test\Debug\OPENCV-test.exe" /INCREMENTAL /NOLOGO /LIBPATH:\lib /LIBPATH:\staticlib opencv_ts300d.lib opencv_world300d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\Workspace\Visual Studio\Projects\OPENCV-test\Debug\OPENCV-test.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\Workspace\Visual Studio\Projects\OPENCV-test\Debug\OPENCV-test.lib" /MACHINE:X64 Debug\Source.obj
+     1>Debug\Source.obj : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64'
+     1>Done Building Project "E:\Workspace\Visual Studio\Projects\OPENCV-test\OPENCV-test\OPENCV-test.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.37
