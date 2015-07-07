@@ -14,8 +14,8 @@ using namespace cv;
 int main(int argc, const char * argv[])
 {
 	VideoCapture cap(CV_CAP_ANY);
-	cap.set(CV_CAP_PROP_FRAME_WIDTH, 320);
-	cap.set(CV_CAP_PROP_FRAME_HEIGHT, 240);
+	cap.set(CV_CAP_PROP_FRAME_WIDTH, 1280);
+	cap.set(CV_CAP_PROP_FRAME_HEIGHT, 720);
 	if (!cap.isOpened())
 		return -1;
 

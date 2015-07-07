@@ -1,0 +1,24 @@
+﻿Build started 7/7/2015 1:07:33 PM.
+     1>Project "D:\Downloads\cvdrone-master\build\vs2013\test.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I..\..\src\3rdparty\opencv\include /I..\..\src\3rdparty\ffmpeg\include /I..\..\src\3rdparty\pthread\include /I..\..\src\3rdparty\glut\include /Zi /nologo /W3 /WX- /O2 /Oy- /GL /D WIN32 /D NOMINMAX /D NDEBUG /D _CONSOLE /D __STDC_CONSTANT_MACROS /D _MBCS /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\obj\release\\" /Fd".\obj\release\vc120.pdb" /Gd /TP /wd4996 /wd4244 /analyze- /errorReport:prompt ..\..\src\main.cpp
+         main.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"..\..\bin\vs2013\test.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:..\..\src\3rdparty\opencv\lib\vs2013 /LIBPATH:..\..\src\3rdparty\ffmpeg\lib /LIBPATH:..\..\src\3rdparty\pthread\lib /LIBPATH:..\..\src\3rdparty\glut\lib wsock32.lib opencv_calib3d300.lib opencv_core300.lib opencv_features2d300.lib opencv_flann300.lib opencv_highgui300.lib opencv_imgcodecs300.lib opencv_imgproc300.lib opencv_ml300.lib opencv_objdetect300.lib opencv_photo300.lib opencv_shape300.lib opencv_stitching300.lib opencv_superres300.lib opencv_video300.lib opencv_videoio300.lib opencv_videostab300.lib avcodec.lib avdevice.lib avfilter.lib avformat.lib avutil.lib swresample.lib swscale.lib pthreadVC2.lib glut32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /manifestinput:..\..\src\resource\test.exe.manifest /DEBUG /PDB:".\obj\release\release.pdb" /SUBSYSTEM:CONSOLE /STACK:"0","0" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"..\..\bin\vs2013\test.lib" /MACHINE:X86 /SAFESEH .\obj\release\resource.res
+         .\obj\release\ardrone.obj
+         .\obj\release\command.obj
+         .\obj\release\config.obj
+         .\obj\release\navdata.obj
+         .\obj\release\tcp.obj
+         .\obj\release\udp.obj
+         .\obj\release\version.obj
+         .\obj\release\video.obj
+         .\obj\release\main.obj
+         Generating code
+         Finished generating code
+         test.vcxproj -> D:\Downloads\cvdrone-master\build\vs2013\..\..\bin\vs2013\test.exe
+     1>Done Building Project "D:\Downloads\cvdrone-master\build\vs2013\test.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.04
