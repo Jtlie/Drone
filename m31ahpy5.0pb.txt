@@ -1,0 +1,98 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	modified:   OPENCV-test/OPENCV-test.sdf
+#	modified:   OPENCV-test/OPENCV-test.sln
+#	modified:   OPENCV-test/OPENCV-test.v12.suo
+#	modified:   OPENCV-test/OPENCV-test/Debug/OPENCV-test.log
+#	modified:   OPENCV-test/OPENCV-test/Debug/OPENCV-test.tlog/CL.read.1.tlog
+#	modified:   OPENCV-test/OPENCV-test/Debug/OPENCV-test.tlog/CL.write.1.tlog
+#	modified:   OPENCV-test/OPENCV-test/Debug/OPENCV-test.tlog/OPENCV-test.lastbuildstate
+#	modified:   OPENCV-test/OPENCV-test/Debug/OPENCV-test.tlog/cl.command.1.tlog
+#	modified:   OPENCV-test/OPENCV-test/Debug/Source.obj
+#	renamed:    OPENCV-test/OPENCV-test/x64/Debug/vc120.idb -> OPENCV-test/OPENCV-test/Debug/vc120.idb
+#	modified:   OPENCV-test/OPENCV-test/Debug/vc120.pdb
+#	modified:   OPENCV-test/OPENCV-test/OPENCV-test.vcxproj
+#	modified:   OPENCV-test/OPENCV-test/Release/OPENCV-test.log
+#	modified:   OPENCV-test/OPENCV-test/Release/OPENCV-test.tlog/CL.read.1.tlog
+#	modified:   OPENCV-test/OPENCV-test/Release/OPENCV-test.tlog/CL.write.1.tlog
+#	modified:   OPENCV-test/OPENCV-test/Release/OPENCV-test.tlog/OPENCV-test.lastbuildstate
+#	modified:   OPENCV-test/OPENCV-test/Release/OPENCV-test.tlog/cl.command.1.tlog
+#	modified:   OPENCV-test/OPENCV-test/Release/OPENCV-test.tlog/link.command.1.tlog
+#	modified:   OPENCV-test/OPENCV-test/Release/OPENCV-test.tlog/link.read.1.tlog
+#	modified:   OPENCV-test/OPENCV-test/Release/OPENCV-test.tlog/link.write.1.tlog
+#	deleted:    OPENCV-test/OPENCV-test/Release/OPENCV-test.tlog/unsuccessfulbuild
+#	modified:   OPENCV-test/OPENCV-test/Release/Source.obj
+#	modified:   OPENCV-test/OPENCV-test/Release/vc120.pdb
+#	modified:   OPENCV-test/OPENCV-test/Source.cpp
+#	modified:   OPENCV-test/OPENCV-test/x64/Debug/OPENCV-test.log
+#	modified:   OPENCV-test/OPENCV-test/x64/Debug/OPENCV-test.tlog/CL.read.1.tlog
+#	modified:   OPENCV-test/OPENCV-test/x64/Debug/OPENCV-test.tlog/CL.write.1.tlog
+#	modified:   OPENCV-test/OPENCV-test/x64/Debug/OPENCV-test.tlog/OPENCV-test.lastbuildstate
+#	modified:   OPENCV-test/OPENCV-test/x64/Debug/OPENCV-test.tlog/cl.command.1.tlog
+#	renamed:    OPENCV-test/OPENCV-test/Release/OPENCV-test.tlog/link.command.1.tlog -> OPENCV-test/OPENCV-test/x64/Debug/OPENCV-test.tlog/link.command.1.tlog
+#	renamed:    OPENCV-test/OPENCV-test/Release/OPENCV-test.tlog/link.read.1.tlog -> OPENCV-test/OPENCV-test/x64/Debug/OPENCV-test.tlog/link.read.1.tlog
+#	renamed:    OPENCV-test/OPENCV-test/Release/OPENCV-test.tlog/link.write.1.tlog -> OPENCV-test/OPENCV-test/x64/Debug/OPENCV-test.tlog/link.write.1.tlog
+#	modified:   OPENCV-test/OPENCV-test/x64/Debug/Source.obj
+#	modified:   OPENCV-test/OPENCV-test/x64/Debug/vc120.idb
+#	modified:   OPENCV-test/OPENCV-test/x64/Debug/vc120.pdb
+#	modified:   OPENCV-test/Release/OPENCV-test.exe
+#	modified:   OPENCV-test/Release/OPENCV-test.pdb
+#	deleted:    OPENCV-test/x64/Debug/OPENCV-test.exe
+#	deleted:    OPENCV-test/x64/Debug/OPENCV-test.ilk
+#	deleted:    OPENCV-test/x64/Debug/OPENCV-test.pdb
+#	new file:   kschluff/Debug/kschluff.exe
+#	new file:   kschluff/Debug/kschluff.ilk
+#	new file:   kschluff/Debug/kschluff.pdb
+#	new file:   kschluff/kschluff-particle_tracker-ed6c89b0f97c/kschluff-particle_tracker-ed6c89b0f97c/.hg_archival.txt
+#	new file:   kschluff/kschluff-particle_tracker-ed6c89b0f97c/kschluff-particle_tracker-ed6c89b0f97c/COPYING
+#	new file:   kschluff/kschluff-particle_tracker-ed6c89b0f97c/kschluff-particle_tracker-ed6c89b0f97c/README
+#	new file:   kschluff/kschluff-particle_tracker-ed6c89b0f97c/kschluff-particle_tracker-ed6c89b0f97c/condens.cpp
+#	new file:   kschluff/kschluff-particle_tracker-ed6c89b0f97c/kschluff-particle_tracker-ed6c89b0f97c/condens.h
+#	new file:   kschluff/kschluff-particle_tracker-ed6c89b0f97c/kschluff-particle_tracker-ed6c89b0f97c/filter.cpp
+#	new file:   kschluff/kschluff-particle_tracker-ed6c89b0f97c/kschluff-particle_tracker-ed6c89b0f97c/filter.h
+#	new file:   kschluff/kschluff-particle_tracker-ed6c89b0f97c/kschluff-particle_tracker-ed6c89b0f97c/hist.cpp
+#	new file:   kschluff/kschluff-particle_tracker-ed6c89b0f97c/kschluff-particle_tracker-ed6c89b0f97c/hist.h
+#	new file:   kschluff/kschluff-particle_tracker-ed6c89b0f97c/kschluff-particle_tracker-ed6c89b0f97c/lbp.cpp
+#	new file:   kschluff/kschluff-particle_tracker-ed6c89b0f97c/kschluff-particle_tracker-ed6c89b0f97c/lbp.h
+#	new file:   kschluff/kschluff-particle_tracker-ed6c89b0f97c/kschluff-particle_tracker-ed6c89b0f97c/main.cpp
+#	new file:   kschluff/kschluff-particle_tracker-ed6c89b0f97c/kschluff-particle_tracker-ed6c89b0f97c/makefile
+#	new file:   kschluff/kschluff-particle_tracker-ed6c89b0f97c/kschluff-particle_tracker-ed6c89b0f97c/selector.cpp
+#	new file:   kschluff/kschluff-particle_tracker-ed6c89b0f97c/kschluff-particle_tracker-ed6c89b0f97c/selector.h
+#	new file:   kschluff/kschluff-particle_tracker-ed6c89b0f97c/kschluff-particle_tracker-ed6c89b0f97c/state.h
+#	new file:   kschluff/kschluff.sdf
+#	new file:   kschluff/kschluff.sln
+#	new file:   kschluff/kschluff.v12.suo
+#	new file:   kschluff/kschluff/Debug/condens.obj
+#	new file:   kschluff/kschluff/Debug/filter.obj
+#	new file:   kschluff/kschluff/Debug/hist.obj
+#	new file:   kschluff/kschluff/Debug/kschluff.Build.CppClean.log
+#	new file:   kschluff/kschluff/Debug/kschluff.log
+#	new file:   kschluff/kschluff/Debug/kschluff.tlog/CL.read.1.tlog
+#	new file:   kschluff/kschluff/Debug/kschluff.tlog/CL.write.1.tlog
+#	new file:   kschluff/kschluff/Debug/kschluff.tlog/cl.command.1.tlog
+#	new file:   kschluff/kschluff/Debug/kschluff.tlog/kschluff.lastbuildstate
+#	new file:   kschluff/kschluff/Debug/kschluff.tlog/link.command.1.tlog
+#	new file:   kschluff/kschluff/Debug/kschluff.tlog/link.read.1.tlog
+#	new file:   kschluff/kschluff/Debug/kschluff.tlog/link.write.1.tlog
+#	new file:   kschluff/kschluff/Debug/lbp.obj
+#	new file:   kschluff/kschluff/Debug/main.obj
+#	new file:   kschluff/kschluff/Debug/selector.obj
+#	new file:   kschluff/kschluff/Debug/vc120.idb
+#	new file:   kschluff/kschluff/Debug/vc120.pdb
+#	new file:   kschluff/kschluff/getopt.h
+#	new file:   kschluff/kschluff/kschluff.vcxproj
+#	new file:   kschluff/kschluff/kschluff.vcxproj.filters
+#	new file:   kschluff/kschluff/unistd.h
+#
+# Untracked files:
+#	OPENCV-test/OPENCV-test.opensdf
+#	OPENCV-test/OPENCV-test/x64/Debug/OPENCV-test.Build.CppClean.log
+#	OPENCV-test/OPENCV-test/x64/Debug/OPENCV-test.tlog/unsuccessfulbuild
+#	TrainHog/
+#
+
