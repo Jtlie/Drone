@@ -1,0 +1,24 @@
+About
+-----
+
+This is an implementation of color/texture based object tracking using a particle filter.  The particle filter is a C++ re-implementation of the Condensation algorithm, with systematic resampling, from OpenCV.  The likleyhood function is based on the Bhattacharya distance between RGB histograms.  Optionally, an additional texture dimension using Local Binary Patterns can be added to the histogram.  This can be helpful when the target is not well differentiated from the background by color. However, in most cases, you can get better results for similar processor utilization by increasing the number of particles.
+
+If the mean state of the tracked object moves off-screen, usually due to having actually lost the target and propagating the position through the constant velocity model, the tracker tries to re-acquire the target.  In a process similar to monte carlo localization with robots, the particles are uniformly distributed across the image area and the filter is allowed to re-converge.  This works quite well in most cases, though sometimes results in false-positives.
+
+Compiling
+---------
+Just a basic makefile. Should work on any Unix-like system.
+
+Usage
+-----
+
+./particle_tracker [-o output_file] [-p num_particles] [-l] [input_file]
+
+	-o output_file : Optional mjpeg output file
+	-p num_particles: Number of particles (samples) to use, default is 200
+	-l: Use local binary patterns in histogram
+	input_file : Optional file to read, otherwise use camera
+
+Dependencies
+------------
+OpenCV 2.x

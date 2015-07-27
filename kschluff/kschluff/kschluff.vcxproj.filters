@@ -15,22 +15,25 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\Desktop\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\condens.cpp">
+    <ClCompile Include="..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\condens.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\Desktop\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp">
+    <ClCompile Include="..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\Desktop\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\hist.cpp">
+    <ClCompile Include="..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\hist.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\Desktop\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\lbp.cpp">
+    <ClCompile Include="..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\lbp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\Desktop\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\main.cpp">
+    <ClCompile Include="..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\Desktop\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\selector.cpp">
+    <ClCompile Include="..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\selector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\cvdrone-master\src\ardrone\config.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

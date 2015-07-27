@@ -50,6 +50,7 @@
 #include <stdarg.h>
 #include <math.h>
 
+
 // OpenCV 1.0
 #include <opencv/cv.h>
 #include <opencv/highgui.h>

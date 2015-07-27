@@ -5,9 +5,17 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -22,7 +30,20 @@
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
@@ -35,17 +56,50 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>E:\Workspace\opencv\opencv\sources\include;D:\Downloads\opencv\sources\include;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\Workspace\opencv\opencv\build\x64\vc12\lib;D:\Downloads\opencv\build\x64\vc12\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>E:\Workspace\opencv\opencv\sources\include;D:\Downloads\opencv\sources\include;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\Workspace\opencv\opencv\build\x64\vc12\lib;D:\Downloads\opencv\build\x64\vc12\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\OpenCV3.0\build\include;$(OPENCV_DIR)\..\..\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>%(OPENCV_DIR)\lib;%(OPENCV_DIR)\staticlib;C:\OpenCV3.0\build\x86\vc12\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_world300d.lib;opencv_ts300d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
@@ -80,13 +134,32 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\Desktop\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\condens.cpp" />
-    <ClCompile Include="..\..\..\..\..\Desktop\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp" />
-    <ClCompile Include="..\..\..\..\..\Desktop\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\hist.cpp" />
-    <ClCompile Include="..\..\..\..\..\Desktop\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\lbp.cpp" />
-    <ClCompile Include="..\..\..\..\..\Desktop\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\main.cpp" />
-    <ClCompile Include="..\..\..\..\..\Desktop\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\selector.cpp" />
+    <ClCompile Include="..\..\cvdrone-master\src\ardrone\config.cpp" />
+    <ClCompile Include="..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\condens.cpp" />
+    <ClCompile Include="..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp" />
+    <ClCompile Include="..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\hist.cpp" />
+    <ClCompile Include="..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\lbp.cpp" />
+    <ClCompile Include="..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\main.cpp" />
+    <ClCompile Include="..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\selector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\Desktop\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\condens.h" />

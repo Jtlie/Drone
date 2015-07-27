@@ -1,0 +1,51 @@
+﻿Build started 7/27/2015 2:20:33 PM.
+     1>Project "D:\Github\Drone\kschluff\kschluff\kschluff.vcxproj" on node 2 (Rebuild target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /IC:\OpenCV3.0\build\include /ID:\Downloads\opencv\build\x64\vc12\..\..\include /Zi /nologo /W3 /WX- /sdl /Od /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt "..\..\cvdrone-master\src\ardrone\config.cpp" "..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\condens.cpp" "..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp" "..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\hist.cpp" "..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\lbp.cpp" "..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\main.cpp" "..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\selector.cpp"
+         selector.cpp
+         main.cpp
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\main.cpp(55): warning C4305: 'initializing' : truncation from 'double' to 'float'
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\main.cpp(247): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\main.cpp(248): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\main.cpp(249): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+         lbp.cpp
+         hist.cpp
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\hist.cpp(54): warning C4244: 'initializing' : conversion from 'unsigned int' to 'const float', possible loss of data
+         filter.cpp
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp(47): warning C4244: 'initializing' : conversion from 'int' to 'const float', possible loss of data
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp(48): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp(71): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp(73): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp(74): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp(75): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp(76): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp(88): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp(90): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp(91): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp(92): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp(93): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp(103): warning C4244: 'argument' : conversion from 'float' to 'int', possible loss of data
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp(106): warning C4244: 'initializing' : conversion from 'int' to 'const float', possible loss of data
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp(125): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp(138): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp(139): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp(140): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp(141): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp(153): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp(154): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp(155): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp(156): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\filter.cpp(172): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+         condens.cpp
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\condens.cpp(20): warning C4244: 'initializing' : conversion from 'double' to 'const float', possible loss of data
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\condens.cpp(74): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\condens.cpp(89): warning C4244: 'initializing' : conversion from 'double' to 'float', possible loss of data
+     1>..\kschluff-particle_tracker-ed6c89b0f97c\kschluff-particle_tracker-ed6c89b0f97c\condens.cpp(93): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+         config.cpp
+     1>d:\github\drone\cvdrone-master\src\ardrone\ardrone.h(63): fatal error C1083: Cannot open include file: 'libavcodec/avcodec.h': No such file or directory
+         Generating Code...
+     1>Done Building Project "D:\Github\Drone\kschluff\kschluff\kschluff.vcxproj" (Rebuild target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:05.67

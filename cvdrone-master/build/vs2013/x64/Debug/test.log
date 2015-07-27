@@ -1,0 +1,31 @@
+﻿Build started 7/27/2015 2:31:58 PM.
+     1>Project "D:\Github\Drone\cvdrone-master\build\vs2013\test.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I..\..\src\3rdparty\opencv\include /I..\..\src\3rdparty\ffmpeg\include /I..\..\src\3rdparty\pthread\include /I..\..\src\3rdparty\glut\include /ID:\Downloads\opencv\build\x64\vc12\..\..\include /Zi /nologo /W3 /WX- /Od /D WIN32 /D NOMINMAX /D _DEBUG /D _CONSOLE /D __STDC_CONSTANT_MACROS /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt ..\..\src\main.cpp
+         main.cpp
+     1>d:\github\drone\cvdrone-master\src\ardrone/ardrone.h(1192): warning C4996: 'vsnprintf': This function or variable may be unsafe. Consider using vsnprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include\stdio.h(337) : see declaration of 'vsnprintf'
+       ResourceCompile:
+         C:\Program Files (x86)\Windows Kits\8.1\bin\x86\rc.exe /l"0x0409" /nologo /fo"x64\Debug\resource.res" ..\..\src\resource\resource.rc 
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Github\Drone\cvdrone-master\build\vs2013\x64\Debug\test.exe" /INCREMENTAL /NOLOGO /LIBPATH:..\..\src\3rdparty\opencv\lib\vs2013 /LIBPATH:..\..\src\3rdparty\ffmpeg\lib /LIBPATH:..\..\src\3rdparty\pthread\lib /LIBPATH:..\..\src\3rdparty\glut\lib /LIBPATH:D:\Downloads\opencv\build\x64\vc12\lib wsock32.lib opencv_calib3d300.lib opencv_core300.lib opencv_features2d300.lib opencv_flann300.lib opencv_highgui300.lib opencv_imgcodecs300.lib opencv_imgproc300.lib opencv_ml300.lib opencv_objdetect300.lib opencv_photo300.lib opencv_shape300.lib opencv_stitching300.lib opencv_superres300.lib opencv_video300.lib opencv_videoio300.lib opencv_videostab300.lib avcodec.lib avdevice.lib avfilter.lib avformat.lib avutil.lib swresample.lib swscale.lib pthreadVC2.lib glut32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /manifestinput:..\..\src\resource\test.exe.manifest /DEBUG /PDB:".\obj\debug\debug.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Github\Drone\cvdrone-master\build\vs2013\x64\Debug\test.lib" /MACHINE:X64 x64\Debug\resource.res
+         x64\Debug\ardrone.obj
+         x64\Debug\command.obj
+         x64\Debug\config.obj
+         x64\Debug\navdata.obj
+         x64\Debug\tcp.obj
+         x64\Debug\udp.obj
+         x64\Debug\version.obj
+         x64\Debug\video.obj
+         x64\Debug\condens.obj
+         x64\Debug\filter.obj
+         x64\Debug\hist.obj
+         x64\Debug\lbp.obj
+         x64\Debug\selector.obj
+         x64\Debug\main.obj
+     1>opencv_core300.lib(opencv_core300.dll) : fatal error LNK1112: module machine type 'X86' conflicts with target machine type 'x64'
+     1>Done Building Project "D:\Github\Drone\cvdrone-master\build\vs2013\test.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:01.65
