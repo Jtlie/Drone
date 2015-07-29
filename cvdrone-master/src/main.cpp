@@ -5,16 +5,20 @@
 // Description  : This is the entry point of the program.
 // Return value : SUCCESS:0  ERROR:-1
 // --------------------------------------------------------------------------
+
+using namespace cv;
+using namespace std;
+
 int main(int argc, char *argv[])
 {
 	// AR.Drone class
 	ARDrone ardrone;
 
 	// Initialize
-	if (!ardrone.open()) {
-		std::cout << "Failed to initialize." << std::endl;
+	/*if (!ardrone.open()) {
+		cout << "Failed to initialize." << endl;
 		return -1;
-	}
+	}*/
 
 	// Thresholds
 	int minH = 0, maxH = 255;
@@ -22,8 +26,8 @@ int main(int argc, char *argv[])
 	int minV = 0, maxV = 255;
 
 	// XML save data
-	std::string filename("thresholds.xml");
-	cv::FileStorage fs(filename, cv::FileStorage::READ);
+	string filename("thresholds.xml");
+	FileStorage fs(filename, FileStorage::READ);
 
 	// If there is a save file then read it
 	if (fs.isOpened()) {
@@ -37,23 +41,23 @@ int main(int argc, char *argv[])
 	}
 
 	// Create a window
-	cv::namedWindow("binalized");
-	cv::createTrackbar("H max", "binalized", &maxH, 255);
-	cv::createTrackbar("H min", "binalized", &minH, 255);
-	cv::createTrackbar("S max", "binalized", &maxS, 255);
-	cv::createTrackbar("S min", "binalized", &minS, 255);
-	cv::createTrackbar("V max", "binalized", &maxV, 255);
-	cv::createTrackbar("V min", "binalized", &minV, 255);
-	cv::resizeWindow("binalized", 0, 0);
+	namedWindow("binalized");
+	createTrackbar("H max", "binalized", &maxH, 255);
+	createTrackbar("H min", "binalized", &minH, 255);
+	createTrackbar("S max", "binalized", &maxS, 255);
+	createTrackbar("S min", "binalized", &minS, 255);
+	createTrackbar("V max", "binalized", &maxV, 255);
+	createTrackbar("V min", "binalized", &minV, 255);
+	resizeWindow("binalized", 0, 0);
 
 	// Kalman filter
-	cv::KalmanFilter kalman(4, 2, 0);
+	KalmanFilter kalman(4, 2, 0);
 
 	// Sampling time [s]
 	const double dt = 1.0;
 
 	// Transition matrix (x, y, vx, vy)
-	cv::Mat1f A(4, 4);
+	Mat1f A(4, 4);
 	A << 1.0, 0.0, dt, 0.0,
 		0.0, 1.0, 0.0, dt,
 		0.0, 0.0, 1.0, 0.0,
@@ -61,13 +65,13 @@ int main(int argc, char *argv[])
 	kalman.transitionMatrix = A;
 
 	// Measurement matrix (x, y)
-	cv::Mat1f H(2, 4);
+	Mat1f H(2, 4);
 	H << 1, 0, 0, 0,
 		0, 1, 0, 0;
 	kalman.measurementMatrix = H;
 
 	// Process noise covariance (x, y, vx, vy)
-	cv::Mat1f Q(4, 4);
+	Mat1f Q(4, 4);
 	Q << 1e-5, 0.0, 0.0, 0.0,
 		0.0, 1e-5, 0.0, 0.0,
 		0.0, 0.0, 1e-5, 0.0,
@@ -75,47 +79,86 @@ int main(int argc, char *argv[])
 	kalman.processNoiseCov = Q;
 
 	// Measurement noise covariance (x, y)
-	cv::Mat1f R(2, 2);
+	Mat1f R(2, 2);
 	R << 1e-1, 0.0,
 		0.0, 1e-1;
 	kalman.measurementNoiseCov = R;
 
+	// Initialize detector
+	HOGDescriptor hog;
+	hog.setSVMDetector(HOGDescriptor::getDefaultPeopleDetector());
+
+	VideoCapture cap(CV_CAP_ANY);
+
 	// Main loop
 	while (1) {
 		// Key input
-		int key = cv::waitKey(33);
+		int key = waitKey(33);
 		if (key == 0x1b) break;
 
 		// Get an image
-		cv::Mat image = ardrone.getImage();
+		//Mat image = ardrone.getImage();
+
+		Mat image;
+		cap >> image;
 
 		// HSV image
-		cv::Mat hsv;
-		cv::cvtColor(image, hsv, cv::COLOR_BGR2HSV_FULL);
+		Mat hsv;
+		cvtColor(image, hsv, COLOR_BGR2HSV_FULL);
 
+		// Detect
+		vector<Rect> found;
+		hog.detectMultiScale(image, found, 0, Size(4, 4), Size(0, 0), 1.5, 2.0);
+
+		
+		// Show bounding rect
+		vector<Rect>::const_iterator it;
+		for (it = found.begin(); it != found.end(); ++it) {
+			try{
+				Rect r = *it;
+				rectangle(image, r.tl(), r.br(), Scalar(0, 255, 0), 2);
+
+				int midX = (r.tl().x + r.br().x) / 2;
+				int midY = (r.tl().y + r.br().y) / 2;
+				//rectangle(image, Point(midX,midY), Point(midX,midY),Scalar(255, 0, 0), 1);
+
+				
+
+				if (found.size() == 1){
+					//if (key == 'a'){
+						Scalar intensity = image.at<uchar>(floor(midX), floor(midY));
+						std::cout << intensity << "\n";
+					//}
+				}
+			}
+
+			catch (Exception e){
+				std::cout << "error";
+			}
+		}
 		// Binalize
-		cv::Mat binalized;
-		cv::Scalar lower(minH, minS, minV);
-		cv::Scalar upper(maxH, maxS, maxV);
-		cv::inRange(hsv, lower, upper, binalized);
+		Mat binalized;
+		Scalar lower(minH, minS, minV);
+		Scalar upper(maxH, maxS, maxV);
+		inRange(hsv, lower, upper, binalized);
 
 		// Show result
-		cv::imshow("binalized", binalized);
+		imshow("binalized", binalized);
 
 		// De-noising
-		cv::Mat kernel = getStructuringElement(cv::MORPH_RECT, cv::Size(3, 3));
-		cv::morphologyEx(binalized, binalized, cv::MORPH_CLOSE, kernel);
-		//cv::imshow("morphologyEx", binalized);
+		Mat kernel = getStructuringElement(MORPH_RECT, Size(3, 3));
+		morphologyEx(binalized, binalized, MORPH_CLOSE, kernel);
+		//imshow("morphologyEx", binalized);
 
 		// Detect contours
-		std::vector<std::vector<cv::Point>> contours;
-		cv::findContours(binalized.clone(), contours, cv::RETR_CCOMP, cv::CHAIN_APPROX_SIMPLE);
+		vector<vector<Point>> contours;
+		findContours(binalized.clone(), contours, RETR_CCOMP, CHAIN_APPROX_SIMPLE);
 
 		// Find the largest contour
 		int contour_index = -1;
 		double max_area = 0.0;
 		for (size_t i = 0; i < contours.size(); i++) {
-			double area = fabs(cv::contourArea(contours[i]));
+			double area = fabs(contourArea(contours[i]));
 			if (area > max_area) {
 				contour_index = i;
 				max_area = area;
@@ -125,41 +168,41 @@ int main(int argc, char *argv[])
 		// Object detected
 		if (contour_index >= 0) {
 			// Moments
-			cv::Moments moments = cv::moments(contours[contour_index], true);
+			Moments moments = cv::moments(contours[contour_index], true);
 			double marker_y = (int)(moments.m01 / moments.m00);
 			double marker_x = (int)(moments.m10 / moments.m00);
 
 			// Measurements
-			cv::Mat measurement = (cv::Mat1f(2, 1) << marker_x, marker_y);
+			Mat measurement = (Mat1f(2, 1) << marker_x, marker_y);
 
 			// Correction
-			cv::Mat estimated = kalman.correct(measurement);
+			Mat estimated = kalman.correct(measurement);
 
 			// Show result
-			cv::Rect rect = cv::boundingRect(contours[contour_index]);
-			cv::rectangle(image, rect, cv::Scalar(0, 255, 0));
+			Rect rect = boundingRect(contours[contour_index]);
+			rectangle(image, rect, Scalar(0, 255, 0));
 		}
 
 		// Prediction
-		cv::Mat1f prediction = kalman.predict();
+		Mat1f prediction = kalman.predict();
 		int radius = 1e+3 * kalman.errorCovPre.at<float>(0, 0);
 
 		// Show predicted position
-		cv::circle(image, cv::Point(prediction(0, 0), prediction(0, 1)), radius, cv::Scalar(0, 255, 0), 2);
+		circle(image, Point(prediction(0, 0), prediction(0, 1)), radius, Scalar(0, 255, 0), 2);
 
 		// Display the image
-		cv::imshow("camera", image);
+		imshow("camera", image);
 	}
 
 	// Save thresholds
-	fs.open(filename, cv::FileStorage::WRITE);
+	fs.open(filename, FileStorage::WRITE);
 	if (fs.isOpened()) {
-		cv::write(fs, "H_MAX", maxH);
-		cv::write(fs, "H_MIN", minH);
-		cv::write(fs, "S_MAX", maxS);
-		cv::write(fs, "S_MIN", minS);
-		cv::write(fs, "V_MAX", maxV);
-		cv::write(fs, "V_MIN", minV);
+		write(fs, "H_MAX", maxH);
+		write(fs, "H_MIN", minH);
+		write(fs, "S_MAX", maxS);
+		write(fs, "S_MIN", minS);
+		write(fs, "V_MAX", maxV);
+		write(fs, "V_MIN", minV);
 		fs.release();
 	}
 
