@@ -15,21 +15,23 @@ int main(int argc, char *argv[])
 	ARDrone ardrone;
 
 	// Initialize
-	/*if (!ardrone.open()) {
+	if (!ardrone.open()) {
 		cout << "Failed to initialize." << endl;
 		return -1;
-	}*/
+	}
 
 	// Thresholds
-	int minH = 0, maxH = 255;
-	int minS = 0, maxS = 255;
-	int minV = 0, maxV = 255;
+	int minH, maxH;
+	int minS, maxS;
+	int minV, maxV;
+
 
 	// XML save data
-	string filename("thresholds.xml");
-	FileStorage fs(filename, FileStorage::READ);
+	std::string filename("thresholds.xml");
+	cv::FileStorage fs(filename, cv::FileStorage::READ);
 
 	// If there is a save file then read it
+
 	if (fs.isOpened()) {
 		maxH = fs["H_MAX"];
 		minH = fs["H_MIN"];
@@ -39,15 +41,15 @@ int main(int argc, char *argv[])
 		minV = fs["V_MIN"];
 		fs.release();
 	}
-
 	// Create a window
+	
 	namedWindow("binalized");
-	createTrackbar("H max", "binalized", &maxH, 255);
-	createTrackbar("H min", "binalized", &minH, 255);
-	createTrackbar("S max", "binalized", &maxS, 255);
-	createTrackbar("S min", "binalized", &minS, 255);
-	createTrackbar("V max", "binalized", &maxV, 255);
-	createTrackbar("V min", "binalized", &minV, 255);
+	cv::createTrackbar("H max", "binalized", &maxH, 255);
+	cv::createTrackbar("H min", "binalized", &minH, 255);
+	cv::createTrackbar("S max", "binalized", &maxS, 255);
+	cv::createTrackbar("S min", "binalized", &minS, 255);
+	cv::createTrackbar("V max", "binalized", &maxV, 255);
+	cv::createTrackbar("V min", "binalized", &minV, 255);
 	resizeWindow("binalized", 0, 0);
 
 	// Kalman filter
@@ -88,7 +90,7 @@ int main(int argc, char *argv[])
 	HOGDescriptor hog;
 	hog.setSVMDetector(HOGDescriptor::getDefaultPeopleDetector());
 
-	VideoCapture cap(CV_CAP_ANY);
+	//VideoCapture cap(CV_CAP_ANY);
 
 	// Main loop
 	while (1) {
@@ -97,10 +99,10 @@ int main(int argc, char *argv[])
 		if (key == 0x1b) break;
 
 		// Get an image
-		//Mat image = ardrone.getImage();
+		Mat image = ardrone.getImage();
 
-		Mat image;
-		cap >> image;
+		/*Mat image;
+		cap >> image;*/
 
 		// HSV image
 		Mat hsv;
@@ -113,30 +115,41 @@ int main(int argc, char *argv[])
 		
 		// Show bounding rect
 		vector<Rect>::const_iterator it;
+		Vec3b intensity;
 		for (it = found.begin(); it != found.end(); ++it) {
 			try{
 				Rect r = *it;
 				rectangle(image, r.tl(), r.br(), Scalar(0, 255, 0), 2);
 
-				int midX = (r.tl().x + r.br().x) / 2;
-				int midY = (r.tl().y + r.br().y) / 2;
+				int midX;
+				midX = (r.tl().x + r.br().x) / 2;
+				int midY;
+				midY = (r.tl().y + r.br().y) / 2;
 				//rectangle(image, Point(midX,midY), Point(midX,midY),Scalar(255, 0, 0), 1);
-
-				
-
+				std::cout << found.size();
 				if (found.size() == 1){
-					//if (key == 'a'){
-						Scalar intensity = image.at<uchar>(floor(midX), floor(midY));
-						std::cout << intensity << "\n";
-					//}
+					if (key == 'a'){
+					std::cout << midX << "\n";
+					std::cout << midY << "\n";
+					intensity = image.at<Vec3b>(floor(midX), floor(midY));
+					std::cout << floor(midY) << "\n";
+					//rectangle(image, Point(floor(midX),floor(midY)), Point(floor(midX),floor(midY)),Scalar(255, 0, 0), 1);
+					std::cout << intensity << "\n";
+					minH = intensity[0] - 10;
+					minS = intensity[1] - 10;
+					minV = intensity[2] - 10;
+					maxH = intensity[0] + 10;
+					maxS = intensity[1] + 10;
+					maxV = intensity[2] + 10;
+					}
 				}
 			}
-
 			catch (Exception e){
 				std::cout << "error";
 			}
 		}
 		// Binalize
+		
 		Mat binalized;
 		Scalar lower(minH, minS, minV);
 		Scalar upper(maxH, maxS, maxV);
@@ -192,18 +205,6 @@ int main(int argc, char *argv[])
 
 		// Display the image
 		imshow("camera", image);
-	}
-
-	// Save thresholds
-	fs.open(filename, FileStorage::WRITE);
-	if (fs.isOpened()) {
-		write(fs, "H_MAX", maxH);
-		write(fs, "H_MIN", minH);
-		write(fs, "S_MAX", maxS);
-		write(fs, "S_MIN", minS);
-		write(fs, "V_MAX", maxV);
-		write(fs, "V_MIN", minV);
-		fs.release();
 	}
 
 	// See you
