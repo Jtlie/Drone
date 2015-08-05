@@ -11,14 +11,14 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-	//// AR.Drone class
+	// AR.Drone class
 	ARDrone ardrone;
 
-	//// Initialize
-	//if (!ardrone.open()) {
-	//	cout << "Failed to initialize." << endl;
-	//	return -1;
-	//}
+	// Initialize
+	if (!ardrone.open()) {
+		cout << "Failed to initialize." << endl;
+	return -1;
+	}
 
 	// Thresholds
 	int minH, maxH;
@@ -90,8 +90,9 @@ int main(int argc, char *argv[])
 	HOGDescriptor hog;
 	hog.setSVMDetector(HOGDescriptor::getDefaultPeopleDetector());
 
-	VideoCapture cap(CV_CAP_ANY);
-
+	double alpha; /**< Simple contrast control */
+	int beta;
+	
 	// Main loop
 	while (1) {
 		// Key input
@@ -99,25 +100,20 @@ int main(int argc, char *argv[])
 		if (key == 0x1b) break;
 
 		// Get an image
-		//Mat image = ardrone.getImage();
-
-		Mat image;
-		cap >> image;
+	    Mat image = ardrone.getImage();
 
 		// HSV image
 		Mat hsv;
-		cvtColor(image, hsv, COLOR_BGR2HSV_FULL);
+		cvtColor(image, hsv, CV_BGR2HSV_FULL);
 
 		// Detect
 		vector<Rect> found;
-		//drone //hog.detectMultiScale(image, found, 0, Size(4, 4), Size(0, 0), 1.5, 2.0);
-		//camera 
-		hog.detectMultiScale(image, found, 0, Size(8, 8), Size(32, 32), 1.05, 2);
-		
+
+		//drone 
+		hog.detectMultiScale(image, found, 0, Size(4, 4), Size(0, 0), 1.5, 2.0);		
 		
 		// Show bounding rect
 		vector<Rect>::const_iterator it;
-		Vec3b intensity;
 		vector<int> sizes;
 		for (it = found.begin(); it != found.end(); ++it) {
 			try{
@@ -125,7 +121,7 @@ int main(int argc, char *argv[])
 				rectangle(hsv, r.tl(), r.br(), Scalar(0, 255, 0), 2);
 
 				
-				//rectangle(image, Point(midX,midY), Point(midX,midY),Scalar(255, 0, 0), 1)
+				rectangle(image, r.tl(), r.br(), Scalar(0, 255, 0), 2);
 				
 				
 				if (key == 'a'){
@@ -148,14 +144,16 @@ int main(int argc, char *argv[])
 							int midY;
 							midY = (it[p].tl().y + it[p].br().y) / 2;
 							Rect r = it[p];
+							rectangle(image, r.tl(), r.br(), Scalar(0, 0, 255), 2);
 							rectangle(hsv, r.tl(), r.br(), Scalar(0, 0, 255), 2);
 							cout << midX << "\n";
 							cout << midY << "\n";
-							intensity = hsv.at<Vec3b>(floor(midX), floor(midY) - 85);
+							Vec3b intensity = hsv.at<Vec3b>(floor(midY - 60), floor(midX));
+
 							cout << floor(midY) << "\n";
 							cout << intensity;
 							
-							rectangle(image, Point(floor(midX),floor(midY - 85)), Point(floor(midX),floor(midY - 85)),Scalar(255, 0, 0), 3);
+							rectangle(hsv, Point(floor(midX),floor(midY - 60)), Point(floor(midX),floor(midY - 60)),Scalar(255, 0, 0), 3);
 							
 							cout << intensity << "\n";
 							minH = intensity[0] - 35;
@@ -164,31 +162,30 @@ int main(int argc, char *argv[])
 							maxH = intensity[0] + 35;
 							maxS = intensity[1] + 35;
 							maxV = intensity[2] + 35;
-						}
+							}
 					}
 
-					}
+				}
 				
 			}
 			catch (Exception e){
 				std::cout << "error";
 			}
 		}
-		// Binalize
-		
+		// Binalize		
 		Mat binalized;
 		Scalar lower(minH, minS, minV);
 		Scalar upper(maxH, maxS, maxV);
 		inRange(hsv, lower, upper, binalized);
 
 		// Show result
-		imshow("binalized", binalized);
+		//imshow("binalized", binalized);
 		imshow("HSV", hsv);
 
 		// De-noising
 		Mat kernel = getStructuringElement(MORPH_RECT, Size(3, 3));
 		morphologyEx(binalized, binalized, MORPH_CLOSE, kernel);
-		//imshow("morphologyEx", binalized);
+		imshow("morphologyEx", binalized);
 
 		// Detect contours
 		vector<vector<Point>> contours;

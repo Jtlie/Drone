@@ -164,7 +164,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\adaboostDetect.cpp" />
+    <ClCompile Include="..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\colorFeatures.cpp" />
+    <ClCompile Include="..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\main.cpp" />
+    <ClCompile Include="..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\particleFilter.cpp" />
+    <ClCompile Include="..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\tracker.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\adaboostDetect.h" />
+    <ClInclude Include="..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\colorFeatures.h" />
+    <ClInclude Include="..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\constants.h" />
+    <ClInclude Include="..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\particleFilter.h" />
+    <ClInclude Include="..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\tracker.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

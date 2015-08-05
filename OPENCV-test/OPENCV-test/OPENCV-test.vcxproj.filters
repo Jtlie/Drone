@@ -15,8 +15,37 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp">
+    <ClCompile Include="..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\tracker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\adaboostDetect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\colorFeatures.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\particleFilter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\tracker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\adaboostDetect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\colorFeatures.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\constants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\particleFilter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

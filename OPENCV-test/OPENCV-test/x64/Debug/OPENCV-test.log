@@ -1,13 +1,153 @@
-﻿Build started 7/7/2015 12:39:13 PM.
+﻿Build started 8/4/2015 1:09:15 PM.
      1>Project "D:\Github\Drone\OPENCV-test\OPENCV-test\OPENCV-test.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /ID:\Downloads\opencv\build\x64\vc12\..\..\include /Zi /nologo /W3 /WX- /sdl /Od /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt Source.cpp
-         Source.cpp
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Github\Drone\OPENCV-test\x64\Debug\OPENCV-test.exe" /INCREMENTAL /NOLOGO /LIBPATH:\lib /LIBPATH:\staticlib opencv_ts300d.lib opencv_world300d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Github\Drone\OPENCV-test\x64\Debug\OPENCV-test.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Github\Drone\OPENCV-test\x64\Debug\OPENCV-test.lib" /MACHINE:X64 x64\Debug\Source.obj
-         OPENCV-test.vcxproj -> D:\Github\Drone\OPENCV-test\x64\Debug\OPENCV-test.exe
-     1>Done Building Project "D:\Github\Drone\OPENCV-test\OPENCV-test\OPENCV-test.vcxproj" (Build target(s)).
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /ID:\Downloads\opencv\build\x64\vc12\..\..\include /Zi /nologo /W3 /WX- /sdl /Od /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt "..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\adaboostDetect.cpp" "..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\colorFeatures.cpp" "..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\main.cpp" "..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\particleFilter.cpp" "..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\tracker.cpp"
+         tracker.cpp
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\colorFeatures.h(34): error C2143: syntax error : missing ';' before '*'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\colorFeatures.h(34): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\colorFeatures.h(34): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\colorFeatures.h(34): warning C4183: 'bgr2hsv': missing return type; assumed to be a member function returning 'int'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\colorFeatures.h(36): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\colorFeatures.h(42): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\colorFeatures.h(44): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\colorFeatures.h(45): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(40): error C2146: syntax error : missing ';' before identifier 'getParticleRect'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(40): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(40): warning C4183: 'getParticleRect': missing return type; assumed to be a member function returning 'int'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(41): error C2146: syntax error : missing ';' before identifier 'getParticleCenter'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(41): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(41): warning C4183: 'getParticleCenter': missing return type; assumed to be a member function returning 'int'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(44): error C2061: syntax error : identifier 'CvRect'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(46): error C2061: syntax error : identifier 'CvRect'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(53): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(55): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(58): error C2143: syntax error : missing ';' before '*'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(58): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(62): error C2061: syntax error : identifier 'gsl_rng'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(63): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\adaboostDetect.h(22): error C2146: syntax error : missing ';' before identifier 'minSize'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\adaboostDetect.h(22): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\adaboostDetect.h(23): error C2146: syntax error : missing ';' before identifier 'maxSize'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\adaboostDetect.h(23): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\adaboostDetect.h(26): error C2143: syntax error : missing ';' before '*'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\adaboostDetect.h(26): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\adaboostDetect.h(27): error C2143: syntax error : missing ';' before '*'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\adaboostDetect.h(27): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\adaboostDetect.h(28): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\adaboostDetect.h(29): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\adaboostDetect.h(30): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\tracker.h(8): error C2143: syntax error : missing ';' before '*'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\tracker.h(8): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\tracker.h(11): error C2143: syntax error : missing ';' before '*'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\tracker.h(11): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\tracker.h(28): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\tracker.h(41): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\tracker.h(48): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\tracker.h(57): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\tracker.h(62): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\tracker.h(63): error C2143: syntax error : missing ';' before '*'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\tracker.h(63): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\tracker.h(63): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\tracker.h(63): warning C4183: 'subtractObjects': missing return type; assumed to be a member function returning 'int'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\tracker.h(79): error C2061: syntax error : identifier 'IplImage'
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(441): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(441): error C2143: syntax error : missing ',' before 'constant'
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(442): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(442): error C2143: syntax error : missing ')' before 'constant'
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(442): error C2143: syntax error : missing ';' before 'constant'
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(442): error C2988: unrecognizable template declaration/definition
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(442): error C2059: syntax error : 'constant'
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(442): error C2059: syntax error : ')'
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(445): error C2065: 'T' : undeclared identifier
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(445): error C2923: 'cv::Ptr' : 'T' is not a valid template type argument for parameter 'T'
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(447): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(447): error C2143: syntax error : missing ',' before 'constant'
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(448): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(448): error C2143: syntax error : missing ')' before 'constant'
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(448): error C2143: syntax error : missing ';' before 'constant'
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(448): fatal error C1903: unable to recover from previous error(s); stopping compilation
+         particleFilter.cpp
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\colorFeatures.h(34): error C2143: syntax error : missing ';' before '*'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\colorFeatures.h(34): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\colorFeatures.h(34): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\colorFeatures.h(34): warning C4183: 'bgr2hsv': missing return type; assumed to be a member function returning 'int'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\colorFeatures.h(36): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\colorFeatures.h(42): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\colorFeatures.h(44): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\colorFeatures.h(45): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(40): error C2146: syntax error : missing ';' before identifier 'getParticleRect'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(40): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(40): warning C4183: 'getParticleRect': missing return type; assumed to be a member function returning 'int'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(41): error C2146: syntax error : missing ';' before identifier 'getParticleCenter'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(41): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(41): warning C4183: 'getParticleCenter': missing return type; assumed to be a member function returning 'int'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(44): error C2061: syntax error : identifier 'CvRect'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(46): error C2061: syntax error : identifier 'CvRect'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(53): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(55): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(58): error C2143: syntax error : missing ';' before '*'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(58): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(62): error C2061: syntax error : identifier 'gsl_rng'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(63): error C2061: syntax error : identifier 'IplImage'
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(441): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(441): error C2143: syntax error : missing ',' before 'constant'
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(442): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(442): error C2143: syntax error : missing ')' before 'constant'
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(442): error C2143: syntax error : missing ';' before 'constant'
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(442): error C2988: unrecognizable template declaration/definition
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(442): error C2059: syntax error : 'constant'
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(442): error C2059: syntax error : ')'
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(445): error C2065: 'T' : undeclared identifier
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(445): error C2923: 'cv::Ptr' : 'T' is not a valid template type argument for parameter 'T'
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(447): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(447): error C2143: syntax error : missing ',' before 'constant'
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(448): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(448): error C2143: syntax error : missing ')' before 'constant'
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(448): error C2143: syntax error : missing ';' before 'constant'
+     1>D:\Downloads\opencv\build\include\opencv2/core/cvstd.hpp(448): fatal error C1903: unable to recover from previous error(s); stopping compilation
+         main.cpp
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(58): error C2143: syntax error : missing ';' before '*'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(58): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\particleFilter.h(62): error C2061: syntax error : identifier 'gsl_rng'
+         colorFeatures.cpp
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\colorFeatures.h(34): error C2143: syntax error : missing ';' before '*'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\colorFeatures.h(34): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\colorFeatures.h(34): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\colorFeatures.h(34): warning C4183: 'bgr2hsv': missing return type; assumed to be a member function returning 'int'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\colorFeatures.h(36): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\colorFeatures.h(42): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\colorFeatures.h(44): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\colorFeatures.h(45): error C2061: syntax error : identifier 'IplImage'
+     1>..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\colorFeatures.cpp(7): error C2143: syntax error : missing ';' before '*'
+     1>..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\colorFeatures.cpp(7): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\colorFeatures.cpp(7): error C2065: 'bgr' : undeclared identifier
+     1>..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\colorFeatures.cpp(7): error C2761: 'int *colorFeatures::bgr2hsv(void)' : member function redeclaration not allowed
+     1>..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\colorFeatures.cpp(7): fatal error C1903: unable to recover from previous error(s); stopping compilation
+         adaboostDetect.cpp
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\adaboostDetect.h(22): error C2146: syntax error : missing ';' before identifier 'minSize'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\adaboostDetect.h(22): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\adaboostDetect.h(23): error C2146: syntax error : missing ';' before identifier 'maxSize'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\adaboostDetect.h(23): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\adaboostDetect.h(26): error C2143: syntax error : missing ';' before '*'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\adaboostDetect.h(26): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\adaboostDetect.h(27): error C2143: syntax error : missing ';' before '*'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\adaboostDetect.h(27): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\adaboostDetect.h(28): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\adaboostDetect.h(29): error C2061: syntax error : identifier 'IplImage'
+     1>d:\downloads\particle-filter-master\particle-filter-master\src\adaboostDetect.h(30): error C2061: syntax error : identifier 'IplImage'
+     1>..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\adaboostDetect.cpp(17): error C2065: 'minSize' : undeclared identifier
+     1>..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\adaboostDetect.cpp(19): error C2065: 'storage' : undeclared identifier
+     1>..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\adaboostDetect.cpp(20): error C2065: 'cascade' : undeclared identifier
+     1>..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\adaboostDetect.cpp(24): error C2065: 'storage' : undeclared identifier
+     1>..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\adaboostDetect.cpp(27): error C2511: 'int adaboostDetect::detectAndDraw(IplImage *,CvRect **)' : overloaded member function not found in 'adaboostDetect'
+                 d:\downloads\particle-filter-master\particle-filter-master\src\adaboostDetect.h(15) : see declaration of 'adaboostDetect'
+     1>..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\adaboostDetect.cpp(31): error C2597: illegal reference to non-static member 'adaboostDetect::scaleFactor'
+     1>..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\adaboostDetect.cpp(31): error C3867: 'adaboostDetect::scaleFactor': function call missing argument list; use '&adaboostDetect::scaleFactor' to create a pointer to member
+     1>..\..\..\..\Downloads\Particle-Filter-master\Particle-Filter-master\src\adaboostDetect.cpp(31): error C2568: '/' : unable to resolve function overload
+                 unable to recover from previous error(s); stopping compilation
+         Generating Code...
+     1>Done Building Project "D:\Github\Drone\OPENCV-test\OPENCV-test\OPENCV-test.vcxproj" (Build target(s)) -- FAILED.
 
-Build succeeded.
+Build FAILED.
 
-Time Elapsed 00:00:01.45
+Time Elapsed 00:00:01.61
