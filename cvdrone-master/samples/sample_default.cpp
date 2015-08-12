@@ -16,8 +16,8 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    // Battery
-    std::cout << "Battery = " << ardrone.getBatteryPercentage() << "[%]" << std::endl;
+    // Battery  std::cout << "Battery = " << ardrone.getBatteryPercentage() << "[%]" << std::endl;
+  
 
     // Instructions
     std::cout << "***************************************" << std::endl;

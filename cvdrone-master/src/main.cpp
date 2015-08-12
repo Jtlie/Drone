@@ -1,18 +1,27 @@
-#include "ardrone/ardrone.h"
+//Copyright
 
-// --------------------------------------------------------------------------
-// main(Number of arguments, Argument values)
-// Description  : This is the entry point of the program.
-// Return value : SUCCESS:0  ERROR:-1
-// --------------------------------------------------------------------------
+#include "ardrone/ardrone.h"
 
 using namespace cv;
 using namespace std;
 
+KalmanFilter kalman_filter();
+Mat binalize(int minH, int minS, int minV, int maxH, int maxS, int maxV, Mat hsv, vector<Point> rectanglePos);
+int largestContour(int minH, int minS, int minV, int maxH, int maxS, int maxV, Mat hsv, vector<Point> rectanglePos, vector<vector<Point>> contours);
+void objectDetect(vector<vector<Point>> contours, int contour_index, KalmanFilter kalman, Mat image);
+Point showResult(KalmanFilter kalman, Mat image);
+
+
+// AR.Drone class
+ARDrone ardrone;
+
 int main(int argc, char *argv[])
 {
-	// AR.Drone class
 	ARDrone ardrone;
+	vector<Point> rectanglePos;
+	Vec3b intensity;
+	Point result;
+	double vx = 0.0, vy = 0.0, vz = 0.0, vr = 0.0;
 
 	// Initialize
 	if (!ardrone.open()) {
@@ -27,8 +36,8 @@ int main(int argc, char *argv[])
 
 
 	// XML save data
-	std::string filename("thresholds.xml");
-	cv::FileStorage fs(filename, cv::FileStorage::READ);
+	string filename("thresholds.xml");
+	FileStorage fs(filename, FileStorage::READ);
 
 	// If there is a save file then read it
 
@@ -41,17 +50,200 @@ int main(int argc, char *argv[])
 		minV = fs["V_MIN"];
 		fs.release();
 	}
-	// Create a window
-	
-	namedWindow("binalized");
-	cv::createTrackbar("H max", "binalized", &maxH, 255);
-	cv::createTrackbar("H min", "binalized", &minH, 255);
-	cv::createTrackbar("S max", "binalized", &maxS, 255);
-	cv::createTrackbar("S min", "binalized", &minS, 255);
-	cv::createTrackbar("V max", "binalized", &maxV, 255);
-	cv::createTrackbar("V min", "binalized", &minV, 255);
-	resizeWindow("binalized", 0, 0);
 
+	// Initialize Kalman Filter
+	KalmanFilter kalman = kalman_filter();
+
+	// Initialize detector
+	HOGDescriptor hog;
+	hog.setSVMDetector(HOGDescriptor::getDefaultPeopleDetector());
+
+	//target found
+	boolean target = false;
+	std::cout << "Battery = " << ardrone.getBatteryPercentage() << "[%]" << std::endl;
+	// Main loop
+	while (1) {
+		// Key input
+
+		int key = waitKey(33);
+		if (key == 0x1b) break;
+
+		// Get an image
+		Mat image = ardrone.getImage();
+
+		// HSV image
+		Mat hsv;
+		cvtColor(image, hsv, CV_BGR2HSV_FULL);
+
+		// Detect
+		vector<Rect> found;
+
+		//drone 
+		hog.detectMultiScale(image, found, 0, Size(4, 4), Size(0, 0), 1.5, 2.0);
+		
+
+		// Take off / Landing 
+		if (key == ' ') {
+			if (ardrone.onGround()) ardrone.takeoff();
+			else                    ardrone.landing();
+		}
+
+		// Show bounding rect
+		vector<Rect>::const_iterator it;
+		vector<int> sizes;
+		
+		
+		for (it = found.begin(); it != found.end(); ++it) {
+
+			Rect r = *it;
+			rectangle(image, r.tl(), r.br(), Scalar(0, 255, 0), 2);
+
+			int size = (r.br().x - r.tl().x) * (r.br().y - r.tl().y);
+			sizes.insert(sizes.end(), size);
+			int biggest = sizes[0];
+			for (int l = 1; l < sizes.size(); l++){
+				if (biggest < sizes[l]){
+					biggest = sizes[l];
+				}
+			}
+			
+			for (int p = 0; p < sizes.size(); p++)
+			{
+				if ((it[p].br().x - it[p].tl().x) * (it[p].br().y - it[p].tl().y) == biggest){
+					int midX;
+					midX = (it[p].tl().x + it[p].br().x) / 2;
+					int midY;
+					midY = (it[p].tl().y + it[p].br().y) / 2;
+					Rect r = it[p];
+					rectangle(image, r.tl(), r.br(), Scalar(0, 0, 255), 2);
+					rectangle(hsv, r.tl(), r.br(), Scalar(0, 0, 255), 2);
+
+					rectanglePos.clear();
+					rectanglePos.insert(rectanglePos.end(), it[p].tl());
+					rectanglePos.insert(rectanglePos.end(), it[p].br());
+
+					intensity = hsv.at<Vec3b>(floor(midY - 30), floor(midX));
+					rectangle(hsv, Point(floor(midX), floor(midY - 30)), Point(floor(midX), floor(midY - 30)), Scalar(255, 0, 0), 3);
+
+
+				}
+			}
+
+
+			//Set Target
+			if (key == 'a'){
+				target = true;
+
+				minH = intensity[0] - 20;
+				minS = intensity[1] - 20;
+				minV = intensity[2] - 20;
+				maxH = intensity[0] + 20;
+				maxS = intensity[1] + 20;
+				maxV = intensity[2] + 20;			
+			}
+		}
+		
+		// Detect contours		
+		vector<vector<Point>> contours;
+		cv::findContours(binalize(minH, minS, minV, maxH, maxS, maxV, hsv, rectanglePos).clone(), contours, RETR_CCOMP, CHAIN_APPROX_SIMPLE);
+
+		// Find the largest contour
+		int contour_index = largestContour(minH, minS, minV, maxH, maxS, maxV, hsv, rectanglePos, contours);
+
+		// Object detected
+		if (contour_index >= 0) {
+			objectDetect(contours, contour_index, kalman, image);
+		}
+
+		// Display the image
+		result = showResult(kalman, image);
+
+		if (target){
+			
+			
+			rectangle(image, Point(300, 160), Point(340, 200), Scalar(0, 0, 255), 2);
+			
+			if (result.x >= rectanglePos[0].x && result.x <= rectanglePos[1].x && result.y >= rectanglePos[0].y && result.y <= rectanglePos[1].y)
+			{
+				int breedte = rectanglePos[1].x - rectanglePos[0].x;
+				int lengte = rectanglePos[1].y - rectanglePos[0].y;
+				int oppervlakte = breedte * lengte; 
+				cout << "oppervlakte"<< oppervlakte << "\n";
+
+				
+				
+				if (key == 'k' || key == CV_VK_DOWN)  vx = -1.0;
+
+				double horizontaldifference;
+				double verticaldifference;
+				//Turn Left
+				if (result.x <= 300)
+				{
+					horizontaldifference = 300 - result.x;
+					vr = horizontaldifference / 500;
+					
+				}
+				//Turn Right
+				else if (result.x >= 340)
+				{
+					horizontaldifference = result.x - 340;
+					vr = horizontaldifference / 500 * -1;
+					
+				}
+				//Stay Still
+				else if (result.x > 300 && result.x < 340){
+					vr = 0.0;
+				}
+
+				//forward
+				if (oppervlakte == 41472)    vx = 0.0;
+				else if (oppervlakte == 18432) vx = 0.4;
+				else if (oppervlakte == 8192) vx = 0.6;
+
+				//Up
+				if (result.y <= 160)
+				{
+					verticaldifference = 160 - result.y;
+					vz = verticaldifference / 320;
+					cout << vz << "\n";
+				}
+				//Down
+				else if (result.y >= 200)
+				{
+					horizontaldifference = result.x - 200;
+					vz = horizontaldifference / 320 * -1;
+					cout << vz << "\n";
+				}
+
+				//Stay Still
+				else if (result.y > 160 && result.y < 200){
+					vz = 0.0;
+				}
+
+
+
+
+				
+				ardrone.move3D(vx, vy, vz, vr);
+			}
+			else
+			{
+				vx = 0.0, vy = 0.0, vz = 0.0, vr = 0.0;
+				ardrone.move3D(vx, vy, vz, vr);
+			}
+			
+		}
+		
+		
+	}
+
+	// See you
+	ardrone.close();
+
+	return 0;
+}
+
+KalmanFilter kalman_filter() {
 	// Kalman filter
 	KalmanFilter kalman(4, 2, 0);
 
@@ -86,153 +278,78 @@ int main(int argc, char *argv[])
 		0.0, 1e-1;
 	kalman.measurementNoiseCov = R;
 
-	// Initialize detector
-	HOGDescriptor hog;
-	hog.setSVMDetector(HOGDescriptor::getDefaultPeopleDetector());
-
-	double alpha; /**< Simple contrast control */
-	int beta;
-	
-	// Main loop
-	while (1) {
-		// Key input
-		int key = waitKey(33);
-		if (key == 0x1b) break;
-
-		// Get an image
-	    Mat image = ardrone.getImage();
-
-		// HSV image
-		Mat hsv;
-		cvtColor(image, hsv, CV_BGR2HSV_FULL);
-
-		// Detect
-		vector<Rect> found;
-
-		//drone 
-		hog.detectMultiScale(image, found, 0, Size(4, 4), Size(0, 0), 1.5, 2.0);		
-		
-		// Show bounding rect
-		vector<Rect>::const_iterator it;
-		vector<int> sizes;
-		for (it = found.begin(); it != found.end(); ++it) {
-			try{
-				Rect r = *it;
-				rectangle(hsv, r.tl(), r.br(), Scalar(0, 255, 0), 2);
-
-				
-				rectangle(image, r.tl(), r.br(), Scalar(0, 255, 0), 2);
-				
-				
-				if (key == 'a'){
-					
-					int size = (r.br().x - r.tl().x) * (r.br().y - r.tl().y);
-					
-					sizes.insert(sizes.end(), size);
-					int highest = sizes[0];
-					for (int l = 1; l < sizes.size(); l++){
-						if (highest < sizes[l]){
-							highest = sizes[l];
-						}
-					}
-
-					for (int p = 0; p < sizes.size(); p++)
-					{
-						if ((it[p].br().x - it[p].tl().x) * (it[p].br().y - it[p].tl().y) == highest){
-							int midX;
-							midX = (it[p].tl().x + it[p].br().x) / 2;
-							int midY;
-							midY = (it[p].tl().y + it[p].br().y) / 2;
-							Rect r = it[p];
-							rectangle(image, r.tl(), r.br(), Scalar(0, 0, 255), 2);
-							rectangle(hsv, r.tl(), r.br(), Scalar(0, 0, 255), 2);
-							cout << midX << "\n";
-							cout << midY << "\n";
-							Vec3b intensity = hsv.at<Vec3b>(floor(midY - 60), floor(midX));
-
-							cout << floor(midY) << "\n";
-							cout << intensity;
-							
-							rectangle(hsv, Point(floor(midX),floor(midY - 60)), Point(floor(midX),floor(midY - 60)),Scalar(255, 0, 0), 3);
-							
-							cout << intensity << "\n";
-							minH = intensity[0] - 35;
-							minS = intensity[1] - 35;
-							minV = intensity[2] - 35;
-							maxH = intensity[0] + 35;
-							maxS = intensity[1] + 35;
-							maxV = intensity[2] + 35;
-							}
-					}
-
-				}
-				
-			}
-			catch (Exception e){
-				std::cout << "error";
-			}
-		}
-		// Binalize		
-		Mat binalized;
-		Scalar lower(minH, minS, minV);
-		Scalar upper(maxH, maxS, maxV);
-		inRange(hsv, lower, upper, binalized);
-
-		// Show result
-		//imshow("binalized", binalized);
-		imshow("HSV", hsv);
-
-		// De-noising
-		Mat kernel = getStructuringElement(MORPH_RECT, Size(3, 3));
-		morphologyEx(binalized, binalized, MORPH_CLOSE, kernel);
-		imshow("morphologyEx", binalized);
-
-		// Detect contours
-		vector<vector<Point>> contours;
-		findContours(binalized.clone(), contours, RETR_CCOMP, CHAIN_APPROX_SIMPLE);
-
-		// Find the largest contour
-		int contour_index = -1;
-		double max_area = 0.0;
-		for (size_t i = 0; i < contours.size(); i++) {
-			double area = fabs(contourArea(contours[i]));
-			if (area > max_area) {
-				contour_index = i;
-				max_area = area;
-			}
-		}
-
-		// Object detected
-		if (contour_index >= 0) {
-			// Moments
-			Moments moments = cv::moments(contours[contour_index], true);
-			double marker_y = (int)(moments.m01 / moments.m00);
-			double marker_x = (int)(moments.m10 / moments.m00);
-
-			// Measurements
-			Mat measurement = (Mat1f(2, 1) << marker_x, marker_y);
-
-			// Correction
-			Mat estimated = kalman.correct(measurement);
-
-			// Show result
-			Rect rect = boundingRect(contours[contour_index]);
-			rectangle(image, rect, Scalar(0, 255, 0));
-		}
-
-		// Prediction
-		Mat1f prediction = kalman.predict();
-		int radius = 1e+3 * kalman.errorCovPre.at<float>(0, 0);
-
-		// Show predicted position
-		circle(image, Point(prediction(0, 0), prediction(0, 1)), radius, Scalar(0, 255, 0), 2);
-
-		// Display the image
-		imshow("camera", image);
-	}
-
-	// See you
-	ardrone.close();
-
-	return 0;
+	return kalman;
 }
+
+Mat binalize(int minH, int minS, int minV, int maxH, int maxS, int maxV, Mat hsv, vector<Point> rectanglePos){
+	// Binalize		
+	Mat binalized;
+	Scalar lower(minH, minS, minV);
+	Scalar upper(maxH, maxS, maxV);
+	inRange(hsv, lower, upper, binalized);
+
+	//
+	if (rectanglePos.empty() == false){
+			rectangle(binalized, Point(1, 1), Point(rectanglePos[0].x, 360), Scalar(0, 0, 0), -1);
+			rectangle(binalized, Point(rectanglePos[1].x, 1), Point(640, 360), Scalar(0, 0, 0), -1);
+			rectangle(binalized, Point(rectanglePos[0].x, 1), Point(rectanglePos[0].x, rectanglePos[1].y), Scalar(0, 0, 0), -1);
+			rectangle(binalized, Point(rectanglePos[0].x, rectanglePos[1].y), Point(rectanglePos[1].x, 360), Scalar(0, 0, 0), -1);
+	}
+	
+
+	// De-noising
+	Mat kernel = getStructuringElement(MORPH_RECT, Size(3, 3));
+	morphologyEx(binalized, binalized, MORPH_CLOSE, kernel);
+	imshow("morphologyEx", binalized);
+
+	return binalized;
+}
+
+
+int largestContour(int minH, int minS, int minV, int maxH, int maxS, int maxV, Mat hsv, vector<Point> rectanglePos, vector<vector<Point>> contours){
+	cv::findContours(binalize(minH, minS, minV, maxH, maxS, maxV, hsv, rectanglePos).clone(), contours, RETR_CCOMP, CHAIN_APPROX_SIMPLE);
+	
+	// Find the largest contour
+	int contour_index = -1;
+	double max_area = 0.0;
+	for (size_t i = 0; i < contours.size(); i++) {
+		double area = fabs(contourArea(contours[i]));
+		if (area > max_area) {
+			contour_index = i;
+			max_area = area;
+		}
+	}
+	return contour_index;
+}
+
+void objectDetect(vector<vector<Point>> contours, int contour_index, KalmanFilter kalman, Mat image){
+	// Moments
+	Moments moments = cv::moments(contours[contour_index], true);
+	double marker_y = (int)(moments.m01 / moments.m00);
+	double marker_x = (int)(moments.m10 / moments.m00);
+
+	// Measurements
+	Mat measurement = (Mat1f(2, 1) << marker_x, marker_y);
+
+	// Correction
+	Mat estimated = kalman.correct(measurement);
+
+	// Show result
+	Rect rect = boundingRect(contours[contour_index]);
+	rectangle(image, rect, Scalar(255, 0, 0));
+}
+
+Point showResult(KalmanFilter kalman, Mat image){
+	// Prediction
+	Mat1f prediction = kalman.predict();
+	int radius = 1e+3 * kalman.errorCovPre.at<float>(0, 0);
+
+	// Show predicted position
+	circle(image, Point(prediction(0, 0), prediction(0, 1)), radius, Scalar(0, 255, 0), 2);
+
+	// Display the image
+	imshow("camera", image);
+	Point cirkelPos = Point(prediction(0, 0), prediction(0, 1));
+	return cirkelPos;
+}
+
