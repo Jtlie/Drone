@@ -22,6 +22,9 @@ int main(int argc, char *argv[])
 	Vec3b intensity;
 	Point result;
 	double vx = 0.0, vy = 0.0, vz = 0.0, vr = 0.0;
+	int step = 1;
+	boolean target = false;
+	
 
 	// Initialize
 	if (!ardrone.open()) {
@@ -59,12 +62,11 @@ int main(int argc, char *argv[])
 	hog.setSVMDetector(HOGDescriptor::getDefaultPeopleDetector());
 
 	//target found
-	boolean target = false;
 	std::cout << "Battery = " << ardrone.getBatteryPercentage() << "[%]" << std::endl;
+	cout << "Press space to select a target";
 	// Main loop
 	while (1) {
 		// Key input
-
 		int key = waitKey(33);
 		if (key == 0x1b) break;
 
@@ -81,10 +83,18 @@ int main(int argc, char *argv[])
 		//drone 
 		hog.detectMultiScale(image, found, 0, Size(4, 4), Size(0, 0), 1.5, 4);
 		
+		//reset
+		if (key == 'r' || key == 'R'){
+			ardrone.landing();
+			target = false;
+			step = 1;
+			cout << "Press space to select a target"<< '\n';
+		}
+
 
 		// Take off / Landing 
-		if (key == ' ') {
-			if (ardrone.onGround()) ardrone.takeoff();
+		if (key == ' ' && target == true && step == 3) {
+			if (ardrone.onGround()) ardrone.takeoff(); 
 			else                    ardrone.landing();
 		}
 
@@ -132,15 +142,28 @@ int main(int argc, char *argv[])
 			
 
 			//Set Target
-			if (key == 'a'){
-				target = true;
+			
 
+
+			if (key == ' ' && step == 1){
+				step = 2;
+				cout << "Are you satisfied with the result? [y/n]" << '\n';
 				minH = intensity[0] - 20;
 				minS = intensity[1] - 20;
 				minV = intensity[2] - 20;
 				maxH = intensity[0] + 20;
 				maxS = intensity[1] + 20;
-				maxV = intensity[2] + 20;	
+				maxV = intensity[2] + 20;
+					
+			}
+			if (key == 'y' && step == 2 || key == 'Y' && step == 2){
+				step = 3;
+				cout << "Put the drone on the right position and press 'space' to start tracking" << '\n';
+				target = true;
+			}
+			if (key == 'n' && step == 2 || key == 'N' && step == 2){
+				cout << "Press space to select a target" << '\n';
+				step = 1;
 			}
 
 		}
@@ -222,14 +245,13 @@ int main(int argc, char *argv[])
 					vz = 0.0;
 				}				
 				ardrone.move3D(vx, vy, vz, vr);
-				cout << "forward " << vx << " turn " << vr << " upwards "<< vz <<"\n";
-				cout << "oppervlatke " << oppervlakte;
+				
 			}
 			else
 			{
-				vx = -0.2, vy = 0.0, vz = 0.0, vr = 0.0;
+				vx = -0.1, vy = 0.0, vz = 0.0, vr = 0.0;
 				ardrone.move3D(vx, vy, vz, vr);
-				cout << "forward " << vx << "turn " << vr << "upwards " << vz << "\n";
+				
 			}
 			rectanglePos.clear();
 		}
