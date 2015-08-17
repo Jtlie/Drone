@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
 		vector<Rect> found;
 
 		//drone 
-		hog.detectMultiScale(image, found, 0, Size(4, 4), Size(0, 0), 1.5, 2.0);
+		hog.detectMultiScale(image, found, 0, Size(4, 4), Size(0, 0), 1.5, 4);
 		
 
 		// Take off / Landing 
@@ -109,6 +109,7 @@ int main(int argc, char *argv[])
 			
 			for (int p = 0; p < sizes.size(); p++)
 			{
+				//Take Color and Rectangle of the HOG
 				if ((it[p].br().x - it[p].tl().x) * (it[p].br().y - it[p].tl().y) == biggest){
 					int midX;
 					midX = (it[p].tl().x + it[p].br().x) / 2;
@@ -116,7 +117,6 @@ int main(int argc, char *argv[])
 					midY = (it[p].tl().y + it[p].br().y) / 2;
 					Rect r = it[p];
 					rectangle(image, r.tl(), r.br(), Scalar(0, 0, 255), 2);
-					rectangle(hsv, r.tl(), r.br(), Scalar(0, 0, 255), 2);
 
 					rectanglePos.clear();
 					rectanglePos.insert(rectanglePos.end(), it[p].tl());
@@ -124,11 +124,12 @@ int main(int argc, char *argv[])
 
 					intensity = hsv.at<Vec3b>(floor(midY - 30), floor(midX));
 					rectangle(hsv, Point(floor(midX), floor(midY - 30)), Point(floor(midX), floor(midY - 30)), Scalar(255, 0, 0), 3);
-
-
+					
 				}
+				
 			}
-
+			
+			
 
 			//Set Target
 			if (key == 'a'){
@@ -139,10 +140,11 @@ int main(int argc, char *argv[])
 				minV = intensity[2] - 20;
 				maxH = intensity[0] + 20;
 				maxS = intensity[1] + 20;
-				maxV = intensity[2] + 20;			
+				maxV = intensity[2] + 20;	
 			}
+
 		}
-		
+	
 		// Detect contours		
 		vector<vector<Point>> contours;
 		cv::findContours(binalize(minH, minS, minV, maxH, maxS, maxV, hsv, rectanglePos).clone(), contours, RETR_CCOMP, CHAIN_APPROX_SIMPLE);
@@ -158,24 +160,25 @@ int main(int argc, char *argv[])
 		// Display the image
 		result = showResult(kalman, image);
 
+	
+
 		if (target){
 			
 			
 			rectangle(image, Point(300, 160), Point(340, 200), Scalar(0, 0, 255), 2);
-			
+			int oppervlakte;
 			if (result.x >= rectanglePos[0].x && result.x <= rectanglePos[1].x && result.y >= rectanglePos[0].y && result.y <= rectanglePos[1].y)
 			{
 				int breedte = rectanglePos[1].x - rectanglePos[0].x;
 				int lengte = rectanglePos[1].y - rectanglePos[0].y;
-				int oppervlakte = breedte * lengte; 
-				cout << "oppervlakte"<< oppervlakte << "\n";
-
+				oppervlakte = breedte * lengte; 
 				
-				
+							
 				if (key == 'k' || key == CV_VK_DOWN)  vx = -1.0;
 
 				double horizontaldifference;
 				double verticaldifference;
+
 				//Turn Left
 				if (result.x <= 300)
 				{
@@ -196,7 +199,7 @@ int main(int argc, char *argv[])
 				}
 
 				//forward
-				if (oppervlakte == 41472)    vx = 0.0;
+				if (oppervlakte == 41472)    vx = 0.1;
 				else if (oppervlakte == 18432) vx = 0.4;
 				else if (oppervlakte == 8192) vx = 0.6;
 
@@ -205,33 +208,30 @@ int main(int argc, char *argv[])
 				{
 					verticaldifference = 160 - result.y;
 					vz = verticaldifference / 320;
-					cout << vz << "\n";
+					
 				}
 				//Down
 				else if (result.y >= 200)
 				{
 					horizontaldifference = result.x - 200;
 					vz = horizontaldifference / 320 * -1;
-					cout << vz << "\n";
 				}
 
 				//Stay Still
 				else if (result.y > 160 && result.y < 200){
 					vz = 0.0;
-				}
-
-
-
-
-				
+				}				
 				ardrone.move3D(vx, vy, vz, vr);
+				cout << "forward " << vx << " turn " << vr << " upwards "<< vz <<"\n";
+				cout << "oppervlatke " << oppervlakte;
 			}
 			else
 			{
-				vx = 0.0, vy = 0.0, vz = 0.0, vr = 0.0;
+				vx = -0.2, vy = 0.0, vz = 0.0, vr = 0.0;
 				ardrone.move3D(vx, vy, vz, vr);
+				cout << "forward " << vx << "turn " << vr << "upwards " << vz << "\n";
 			}
-			
+			rectanglePos.clear();
 		}
 		
 		
@@ -239,7 +239,6 @@ int main(int argc, char *argv[])
 
 	// See you
 	ardrone.close();
-
 	return 0;
 }
 
@@ -288,11 +287,11 @@ Mat binalize(int minH, int minS, int minV, int maxH, int maxS, int maxV, Mat hsv
 	Scalar upper(maxH, maxS, maxV);
 	inRange(hsv, lower, upper, binalized);
 
-	//
+	//Make everything black except in the HOG
 	if (rectanglePos.empty() == false){
 			rectangle(binalized, Point(1, 1), Point(rectanglePos[0].x, 360), Scalar(0, 0, 0), -1);
 			rectangle(binalized, Point(rectanglePos[1].x, 1), Point(640, 360), Scalar(0, 0, 0), -1);
-			rectangle(binalized, Point(rectanglePos[0].x, 1), Point(rectanglePos[0].x, rectanglePos[1].y), Scalar(0, 0, 0), -1);
+			rectangle(binalized, Point(rectanglePos[0].x, 1), Point(rectanglePos[1].x, rectanglePos[0].y), Scalar(0, 0, 0), -1);
 			rectangle(binalized, Point(rectanglePos[0].x, rectanglePos[1].y), Point(rectanglePos[1].x, 360), Scalar(0, 0, 0), -1);
 	}
 	
